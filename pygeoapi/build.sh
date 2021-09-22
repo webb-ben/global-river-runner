@@ -1,9 +1,9 @@
 #!/bin/bash
 # =================================================================
 #
-# Authors: Benjamin Webb <benjamin.miller.webb@gmail.com>
+# Authors: Just van den Broecke <justb4@gmail.com>
 #
-# Copyright (c) 2021 Benjamin Webb
+# Copyright (c) 2019 Just van den Broecke
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -27,11 +27,14 @@
 # OTHER DEALINGS IN THE SOFTWARE.
 #
 # =================================================================
+echo "START /build.sh"
 
+set +e
+echo "Begining build"
 # python3 /scripts/ogr2ogr.py \
 #     -f PGDump -lco LAUNDER=NO -lco DROP_TABLE=OFF | gzip > /data/merit_.sql.gz \
 #     /data/merit_plus_simplify.gpkg
-
+while [ ! -f /data/merit_plus_simplify.gpkg ]; do echo 1; sleep 1; done
 ogr2ogr \
 	-f PostgreSQL \
 	PG:"host='localhost' \
@@ -40,6 +43,7 @@ ogr2ogr \
 		dbname='${POSTGRES_DB}'" \
 	/data/merit_plus_simplify.gpkg
 
+echo "Done"
 # ogr2ogr \
 # 	-f PostgreSQL \
 # 	PG:"host='localhost' \
