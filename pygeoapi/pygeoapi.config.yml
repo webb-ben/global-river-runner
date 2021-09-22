@@ -100,11 +100,10 @@ resources:
                 - rivers
         context:
             - schema: https://schema.org/
-              nameID: schema:name
+              nameid: schema:name
         links:
             - type: application/html
               rel: canonical
-              title: data source
               title: source
               href: https://www.sciencebase.gov/catalog/item/614a8864d34e0df5fb97572d
               hreflang: en-US
